@@ -11,10 +11,7 @@ class RedFlag(Resource):
     def __init__(self):
         self.db = db
         self.id = len(db)+1
-
-    def get(self):
-        return db,200
-
+        
     def post(self):
         data = request.get_json()
         new_incidence = Incidence(data['createdBy'],data['image'],data['video'],
