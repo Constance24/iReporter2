@@ -1,12 +1,12 @@
 from unittest import TestCase
 from json import loads, dumps
-from ... import create_app
+from app import create_app
 import json
 
 app =  create_app()
 
 
-class RedfalgsTestCase(TestCase):
+class RedflagsTestCase(TestCase):
     def setUp(self):
         app.testing = True
         self.app = app.test_client()
@@ -52,23 +52,21 @@ class RedfalgsTestCase(TestCase):
 
         self.assertEqual(response.status_code, 204)
 
-
     def test_can_edit_comment_incidence(self):  
-            self.create_incident()
+        self.create_incident()
             
-            response = self.app.patch('/api/v1/redflags/1')
+        response = self.app.patch('/api/v1/redflags/1')
 
-            self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, 405)
 
 
     def test_can_edit_location_incidence(self):  
-            self.create_incident()
+        self.create_incident()
             
-            response = self.app.patch('/api/v1/redflags/1')
+        response = self.app.patch('/api/v1/redflags/1')
 
-            self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, 405)
 
 
-    #     expected = 'incident found'
-    #     self.assertEqual(response.json['message'], expected)
+   
 
