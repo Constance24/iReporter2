@@ -2,8 +2,9 @@ import datetime
 from flask_restful import Resource
 """This module handles incidence data model"""
 db = []
+count = 0
 class Incidence:
-    count = 0
+    
     def __init__(self, createdBy, location,image, video, comment, incidence_type): 
         """creates instance variables for the Incidence class"""
         self.status = 'draft'
@@ -15,14 +16,14 @@ class Incidence:
         self.comment = comment
         self.incidence_type = incidence_type
         self.id = count + 1
-        count +=1 
+        
 
     def get_all_incidences(self):
         return db
     
     def create_incidence(self):
         db.append(self.__dict__)
-        return data
+        return db
         
     def getById():
         pass            
