@@ -60,5 +60,18 @@ class ManageRedFlag(Resource):
                 "data" : success_message
             }), 200)
 
+class RedFlagDelete(Resource):
+    def __init__(self):
+        self.db = db      
+    def delete(self, id):
+        for incidence in db:
+            if incidence['id'] == id:
+                db.pop(id - 1)
+        return make_response(jsonify({
+            "status" : 200,
+            "data" : {
+            "id" : - 1,
+            "message" : "no redflag record" }           
+        }), 404)
     
 
