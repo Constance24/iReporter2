@@ -1,13 +1,11 @@
 import datetime
-
+from flask_restful import Resource
 """This module handles incidence data model"""
-
-db = [] #incidence
-
+db = []
 class Incidence:
+    count = 0
     def __init__(self, createdBy, location,image, video, comment, incidence_type): 
         """creates instance variables for the Incidence class"""
-        self.counter = 0
         self.status = 'draft'
         self.createdOn = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.image = image
@@ -16,29 +14,29 @@ class Incidence:
         self.location = location
         self.comment = comment
         self.incidence_type = incidence_type
+        self.id = count + 1
+        count +=1 
 
     def get_all_incidences(self):
         return db
     
     def create_incidence(self):
-        data = {}
-        data['id'] = len(db)+1
-        data['status'] = self.status
-        data['createdOn'] = self.createdOn
-        data['image'] = self.image
-        data['video'] = self.video
-        data['createdBy'] = self.createdBy
-        data['location'] = self.location
-        data['comment'] = self.comment
-        data['incidence_type'] = self.incidence_type
-
-        db.append(data)
-
-        return {'message':'successfully created',
-                'data':data
-                }
-
+        db.append(self.__dict__)
+        return data
+        
     def getById():
         pass            
 
+    def edit_redflag_location(self, incident):
+        """Method to edit a redflag's location"""
+        incident['location'] = request.json.get('location', 'keyerror')
+        if incident['location'] == 'keyerror':
+            return "keyerror"
+        return "updated"
 
+    def edit_redflag_comment(self, incident):
+        """Method to edit a redflag's comment"""
+        incident['comment'] = request.json.get('comment', 'keyerror')
+        if incident['comment'] == 'keyerror':
+            return "keyerror"
+        return "updated"
