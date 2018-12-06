@@ -1,8 +1,9 @@
 from flask_restful import Resource
 from flask import request, make_response, jsonify
-import json
- 
-from .models import db
+
+
+#local import 
+from .models import Incidence, db
 
 
 class RedFlag(Resource):
@@ -10,17 +11,20 @@ class RedFlag(Resource):
         self.db = db
         self.id = len(db)+1
 
-    def get(self):
-        return db, 200
-        
     def post(self):
-        success_message = {
-            'message' : 'Success created a redflag'
-        }
+        data = request.get_json()
+        
+        new_incidence = Incidence(data['createdBy'],data['image'],data['video'],data['location'], data['comment'], data['incidence_type'])
+        output = new_incidence.create_incidence()
+
         return make_response(jsonify({
             "status" : 201,
-            "message" : success_message
-        }), 201)
+            "data" : "successfully created"
+            }), 201)
+
+    
+
 
 
     
+
