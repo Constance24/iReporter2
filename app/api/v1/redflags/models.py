@@ -4,7 +4,12 @@ from flask_restful import reqparse
 
 """This module handles incidence data model"""
 
-db = [] #incidence
+db = [] 
+
+def validator(value):
+    if not value:
+        raise ValueError("Must not be an empty string")
+        
 parser = reqparse.RequestParser(bundle_errors=True)
 
 parser.add_argument('createdBy',
@@ -66,8 +71,35 @@ class Incidence:
 
         if data["id"] == "keyerror":
             return "keyerror"
+
+        if data['createdBy'] == "createdBykeyerror":
+            return "createdOnkeyerror"
         
-        self.db.append(data)
+        if data['createdOn'] == "createdOnkeyerror":
+            return "createdOnkeyerror"
+
+        if data['type'] == "typekeyerror":
+            return "typekeyerror"
+
+        if data['location'] == "lockeyerror":
+            return "lockeyerror"
+
+        if data['status'] == "statkeyerror":
+            return "statkeyerror"
+
+        if data['images'] == "imagkeyerror":
+            return "imagkeyerror"
+
+        if data['videos'] == "vidkeyerror":
+            return "vidkeyerror"
+    
+        
+
+        if data['comment'] == "comkeyerror":
+            return "comkeyerror"
+
+        
+        self.db.append(self)
         return self.id
 
         return {'message':'successfully created',

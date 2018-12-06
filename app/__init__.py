@@ -1,12 +1,12 @@
 from flask import Flask
 from flask_restful import Api , Resource
 
-#local import
 from .api.v1.redflags.views import RedFlag, ManageRedFlag, RedFlagDelete
 
 def create_app():
     app = Flask(__name__)
     api = Api(app)
+    # app.config.from_object(app_config[config_name])
 
 
     api.add_resource(RedFlag, '/api/v1/redflags')
