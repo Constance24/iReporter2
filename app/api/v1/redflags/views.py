@@ -34,7 +34,7 @@ class ManageRedFlag(Resource):
             if item['id'] == id:
                 return item, 200
 
-def patch(self, id):
+    def patch(self, id):
         incident = self.db.find(id)
         if incident:
             incident['location'] = request.json.get('location', incident['location'])
@@ -47,6 +47,18 @@ def patch(self, id):
                 "data" : success_message
             }), 200)
 
+    def patch(self, id):
+        incident = self.db.find(id)
+        if incident:
+            incident['comment'] = request.json.get('comment', incident['comment'])
+            success_message = {
+                        'message' : 'updated comment on redflag record'
+            }
+
+            return make_response(jsonify({
+                "status" : 201,
+                "data" : success_message
+            }), 200)
 
     
 
